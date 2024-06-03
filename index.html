@@ -3,13 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/escudo.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="assets/favicon.ico" sizes="16x16">
   <title>Atletas Botafogo</title>
-  <link rel="stylesheet" href="estilo.css">
-  <script type='module' src="codigo.js"></script>
+  <link rel="stylesheet" href="css/styleHome.css">
+  <script type='module' src="js/script.js" defer></script>
 </head>
 <body>
-<!-- página com instruções para usar o SHA256 -->
-<!-- https://pajhome.org.uk/crypt/md5/scripts.html -->
+  <header class="header">
+    <img src="assets/imagens/escudo.png" height="200px" width="200px" alt="Escudo do Botafogo">
+    <h1>Botafogo de Futebol e Regatas</h1>
+  </header>
+  <main>
+    <div class="menu">
+      <h4>Atletas do Botafogo em 2024-1</h4>
+      <form>
+          <input id="senha" type="password" placeholder="Senha">
+          <label for="senha">
+          </label>
+      </form>
+      <div id="mensagem">
+
+      </div>
+      <p>Use a senha: SenhaSecreta</p>
+      <button id="btn_enviar">Entrar</button>
+    </div>
+  </main>
 </body>
 </html>
