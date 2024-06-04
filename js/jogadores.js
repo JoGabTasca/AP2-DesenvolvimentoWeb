@@ -1,16 +1,29 @@
 if (sessionStorage.getItem('logado')){
     const url = 'https://botafogo-atletas.mange.li/all';
     let lista_jogadores;
-    // fazer botao pra filtrar so masculino ou so feminino
 
-    const container = document.createElement('container');
-    container.style.display = 'flex';
+    const container = document.createElement('div');
+    container.style.display = 'grid';
     container.style.flexWrap = 'wrap';
-    container.style.gap = '.5em';
+    container.style.gap = '2em';
     container.style.justifyContent = 'center';
+    container.style.maxWidth = '1200px';
+    container.style.margin = '0 auto';
+    container.id = 'myContainer';
+
+    document.body.appendChild(container);
 
     const escudo = document.createElement('img');
     escudo.src = 'assets/imagens/escudo.png';
+
+    const title = document.createElement('h1');
+    title.innerHTML = 'Elenco de Atletas';
+    title.style.color = 'white';
+    title.style.textAlign = 'center';
+    title.style.fontFamily = 'sans-serif';
+    title.style.textTransform = 'uppercase';
+    title.style.margin = '0';
+    title.style.padding = '0';
 
     const divEscudo = document.createElement('div');
     divEscudo.style.display = 'flex';
@@ -21,10 +34,6 @@ if (sessionStorage.getItem('logado')){
 
     const btn_feminino = document.createElement('button');
     btn_feminino.innerHTML = 'Elenco Feminino';
-    btn_feminino.style.backgroundColor = 'black';
-    btn_feminino.style.color = 'white';
-    btn_feminino.style.border = '1px solid white';
-    btn_feminino.style.borderRadius = '10px';
     btn_feminino.onclick = () => {
         container.innerHTML = '';
         lista_jogadores.forEach(
@@ -38,10 +47,6 @@ if (sessionStorage.getItem('logado')){
 
     const btn_masculino = document.createElement('button');
     btn_masculino.innerHTML = 'Elenco Masculino';
-    btn_masculino.style.backgroundColor = 'black';
-    btn_masculino.style.color = 'white';
-    btn_masculino.style.border = '1px solid white';
-    btn_masculino.style.borderRadius = '10px';
     btn_masculino.onclick = () => {
         container.innerHTML = '';
         lista_jogadores.forEach(
@@ -55,10 +60,6 @@ if (sessionStorage.getItem('logado')){
 
     const btn_all = document.createElement('button');
     btn_all.innerHTML = 'Elenco Completo';
-    btn_all.style.backgroundColor = 'black';
-    btn_all.style.color = 'white';
-    btn_all.style.border = '1px solid white';
-    btn_all.style.borderRadius = '10px';
     btn_all.onclick = () => {
         container.innerHTML = '';
         lista_jogadores.forEach(
@@ -69,13 +70,8 @@ if (sessionStorage.getItem('logado')){
     }
 
     const btn_sair = document.createElement('button');
+    btn_sair.id = 'btn_sair';
     btn_sair.innerHTML = 'Sair';
-    btn_sair.style.backgroundColor = 'black';
-    btn_sair.style.color = 'white';
-    btn_sair.style.borderRadius = '10px';
-    btn_sair.style.padding = '5px';
-    btn_sair.style.marginRight = '5px';
-    btn_sair.style.border = '1px solid white';
     btn_sair.onclick = () => {
         sessionStorage.removeItem('logado');
         window.location.href = 'index.html';
@@ -94,17 +90,16 @@ if (sessionStorage.getItem('logado')){
 
     const header = document.createElement('div');
     header.append(divEscudo);
-    //header.append(divPesquisa);
+    header.append(title);
     header.append(btn_sair);
-    header.style.borderRadius = '0 0 10px 10px'
     header.style.display = 'flex';
     header.style.flexWrap = 'wrap';
     header.style.backgroundColor = 'black';
-    header.style.justifyContent = 'space-between';
+    header.style.justifyContent = 'center';
     header.style.alignItems = 'center';
     header.style.padding = '0';
     header.style.margin = '0';
-    header.style.height = '5rem';
+    header.style.height = '8rem';
     header.style.marginBottom = '5px';
 
     const botoes = document.createElement('div');
@@ -138,14 +133,14 @@ if (sessionStorage.getItem('logado')){
     const constroiCard = ( atleta ) => {
         const divCard = document.createElement('article');
         //divCard.className = 'card';
-        divCard.style.backgroundColor = 'white';
+        divCard.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 29%, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%)';
         divCard.style.display = 'grid';
-        divCard.style.width = 'fit-content';
+        divCard.style.width = '220px';
         divCard.style.padding = '.5rem';
-        divCard.style.border = '2px solid black';
+        divCard.style.border = '3px solid black';
         divCard.style.borderRadius = '10px';
-        divCard.style.gridTemplateColumns = "10rem 20rem";
-        divCard.style.gridTemplateAreas = "'a1 a2' 'a3 a3' 'a4 a4'";
+        divCard.style.gridTemplateRows = "20rem 2rem 2rem 5rem 2rem";
+        divCard.style.gridTemplateAreas = "'a1' 'a2' 'a3' 'a4' 'a5'";
 
         divCard.dataset.id = atleta.id;
         divCard.dataset.descricao = atleta.descricao;
@@ -161,17 +156,17 @@ if (sessionStorage.getItem('logado')){
 
         const imagem = document.createElement('img');
         imagem.style.gridArea = 'a1';
-        imagem.style.height = '8rem';
-        imagem.style.width = '8rem';
+        imagem.style.display = 'flex';
+        imagem.style.height = '20rem';
+        imagem.style.width = 'fit-content';
         imagem.style.objectFit = 'cover';
-        imagem.style.borderRadius = '50%';
         imagem.style.objectPosition = 'top';
         imagem.src = atleta.imagem;
         imagem.alt = atleta.nome;
 
         const titulo = document.createElement('section');
         //titulo.className = 'titulo';
-        titulo.style.gridArea = 'a2';
+        titulo.style.gridArea = "a2 a3";
         titulo.style.display = 'flex';
         titulo.style.flexDirection = 'column';
         titulo.style.alignItems = 'center';
@@ -180,16 +175,30 @@ if (sessionStorage.getItem('logado')){
         const pPosicao = document.createElement('p');
         pPosicao.style.fontWeight = 'bold';
         pPosicao.style.fontFamily = 'sans-serif';
-        pPosicao.style.fontSize = '1rem';
+        pPosicao.style.fontSize = '1.1rem';
         pPosicao.style.textTransform = 'uppercase';
+        pPosicao.style.color = 'white';
+        pPosicao.style.backgroundColor = 'black';
+        pPosicao.style.width = '100%';
+        pPosicao.style.height = '2rem';
+        pPosicao.style.textAlign = 'center';
+        pPosicao.style.position = 'relative';
+        pPosicao.style.bottom = '-2rem';
         pPosicao.innerHTML = atleta.posicao;
 
         const pNome = document.createElement('p');
         pNome.style.fontWeight = 'bold';
+        titulo.style.whiteSpace = 'wrap';
         pNome.style.fontFamily = 'sans-serif';
-        pNome.style.fontSize = '1.3rem';
+        pNome.style.fontSize = '1.5rem';
         pNome.style.textTransform = 'uppercase';
+        pNome.style.textAlign = 'center';
         pNome.innerHTML = atleta.nome;
+
+        const btn_more = document.createElement('button');
+        btn_more.id = 'btn_more';
+        btn_more.style.gridArea = 'a4';
+        btn_more.innerHTML = 'SAIBA MAIS';
 
         const pDescri = document.createElement('p');
         //pDescri.className = 'descri'
@@ -206,9 +215,11 @@ if (sessionStorage.getItem('logado')){
 
         divCard.appendChild(imagem);
         
-        divCard.appendChild(titulo);
         titulo.appendChild(pPosicao);
         titulo.appendChild(pNome);
+
+        divCard.appendChild(titulo);
+        divCard.appendChild(btn_more)
 
         //divCard.appendChild(pDescri);
         //divCard.appendChild(pNasci);
@@ -254,4 +265,6 @@ if (sessionStorage.getItem('logado')){
         )
         }
     );
+}else {
+    document.body.innerHTML = '<h1>Você não está logado</h1>';
 }

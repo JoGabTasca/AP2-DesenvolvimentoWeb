@@ -12,7 +12,7 @@ body, html {
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -26,6 +26,28 @@ header{
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+main form{
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  flex-direction: column;
+}
+
+.inputfield{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+}
+
+.inputfield input{
+  border: none;
+  outline: none;
+  background: none;
+  color: #000000;
+  font: 400 1rem Roboto, sans-serif;
 }
 
 .menu{
@@ -67,5 +89,12 @@ button:hover{
 #mensagem{
   color: #ff0000;
   font: 400 1rem Roboto, sans-serif;
+}
+
+@media (max-width: 768px) {
+
+  body, html {
+    flex-direction: column;
+  }
 }
 
