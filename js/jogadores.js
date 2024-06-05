@@ -83,9 +83,9 @@ if (sessionStorage.getItem('logado')){
     divPesquisa.style.padding = '1rem';
 
     const inputPesquisa = document.createElement('input');
+    inputPesquisa.id = 'inputPesquisa'
     inputPesquisa.placeholder = 'Pesquise por posição';
     inputPesquisa.type = 'text';
-    inputPesquisa.style.borderRadius = '10px';
     divPesquisa.appendChild(inputPesquisa);
 
     const header = document.createElement('div');
@@ -104,8 +104,7 @@ if (sessionStorage.getItem('logado')){
 
     const botoes = document.createElement('div');
     botoes.style.display = 'flex';
-    botoes.style.flexWrap = 'wrap';
-    botoes.style.height = '3rem';
+    botoes.style.height = '4rem';
     botoes.style.justifyContent = 'center';
     botoes.style.marginBottom = '5px';
     botoes.style.gap = '1rem';
@@ -139,7 +138,7 @@ if (sessionStorage.getItem('logado')){
         divCard.style.padding = '.5rem';
         divCard.style.border = '3px solid black';
         divCard.style.borderRadius = '10px';
-        divCard.style.gridTemplateRows = "20rem 2rem 2rem 5rem 2rem";
+        divCard.style.gridTemplateRows = "20rem 2rem 5rem 5rem 1rem";
         divCard.style.gridTemplateAreas = "'a1' 'a2' 'a3' 'a4' 'a5'";
 
         divCard.dataset.id = atleta.id;

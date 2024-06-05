@@ -37,6 +37,13 @@ button:hover {
     transform: scale(1.05);
 }
 
+#inputPesquisa{
+    border-radius : 10px;
+    height: 30px;
+    border: 2px solid black;
+    outline: none;
+}
+
 @media screen and (max-width: 768px){
     #myContainer {
         grid-template-columns: auto;
