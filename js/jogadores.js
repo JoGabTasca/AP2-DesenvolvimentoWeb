@@ -1,5 +1,4 @@
 if (sessionStorage.getItem('logado')){
-    const url = 'https://botafogo-atletas.mange.li/all';
     let lista_jogadores;
 
     const container = document.createElement('div');
@@ -36,37 +35,21 @@ if (sessionStorage.getItem('logado')){
     btn_feminino.innerHTML = 'Elenco Feminino';
     btn_feminino.onclick = () => {
         container.innerHTML = '';
-        lista_jogadores.forEach(
-            (jogador) => {
-                if (jogador.elenco === 'feminino'){
-                    constroiCard(jogador);
-                }
-            }
-        )
+        carregarDados('https://botafogo-atletas.mange.li/2024-1/feminino');
     }
 
     const btn_masculino = document.createElement('button');
     btn_masculino.innerHTML = 'Elenco Masculino';
     btn_masculino.onclick = () => {
         container.innerHTML = '';
-        lista_jogadores.forEach(
-            (jogador) => {
-                if (jogador.elenco === 'masculino'){
-                    constroiCard(jogador);
-                }
-            }
-        )
+        carregarDados('https://botafogo-atletas.mange.li/2024-1/masculino');
     }
 
     const btn_all = document.createElement('button');
     btn_all.innerHTML = 'Elenco Completo';
     btn_all.onclick = () => {
         container.innerHTML = '';
-        lista_jogadores.forEach(
-            (jogador) => {
-                constroiCard(jogador);
-            }
-        )
+        carregarDados('https://botafogo-atletas.mange.li/2024-1/all');
     }
 
     const btn_sair = document.createElement('button');
@@ -83,10 +66,26 @@ if (sessionStorage.getItem('logado')){
     divPesquisa.style.padding = '1rem';
 
     const inputPesquisa = document.createElement('input');
-    inputPesquisa.id = 'inputPesquisa'
+    inputPesquisa.id = 'inputPesquisa';
     inputPesquisa.placeholder = 'Pesquise por posição';
     inputPesquisa.type = 'text';
     divPesquisa.appendChild(inputPesquisa);
+
+    inputPesquisa.onkeyup = (event) => {
+        const valor = event.target.value;
+        const resultado = lista_jogadores.filter(
+            (elemento) => elemento.posicao.toLowerCase().includes(valor.toLowerCase())
+        )
+    
+        // Limpar o contêiner antes de adicionar novos cartões
+        container.innerHTML= '';
+    
+        resultado.forEach(
+            (jogador) => {
+                constroiCard(jogador)
+            }
+        )
+    }
 
     const header = document.createElement('div');
     header.append(divEscudo);
@@ -126,20 +125,21 @@ if (sessionStorage.getItem('logado')){
         }
 
         localStorage.setItem('atleta', JSON.stringify(dados));
-        window.location.href = `detalhes.html?altura=${dados.altura}&elenco=${dados.elenco}`;
+        window.location.href = `detalhes.html?id=${dados.id}`;
     }
 
     const constroiCard = ( atleta ) => {
         const divCard = document.createElement('article');
         //divCard.className = 'card';
-        divCard.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 29%, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%)';
+        // radial-gradient(circle, rgba(255,255,255,1) 29%, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%)
+        divCard.style.background = 'black';
         divCard.style.display = 'grid';
         divCard.style.width = '220px';
         divCard.style.padding = '.5rem';
         divCard.style.border = '3px solid black';
         divCard.style.borderRadius = '10px';
-        divCard.style.gridTemplateRows = "20rem 2rem 5rem 5rem 1rem";
-        divCard.style.gridTemplateAreas = "'a1' 'a2' 'a3' 'a4' 'a5'";
+        divCard.style.gridTemplateRows = "20rem 1rem 5rem";
+        divCard.style.gridTemplateAreas = "'a1' 'a2' 'a3'";
 
         divCard.dataset.id = atleta.id;
         divCard.dataset.descricao = atleta.descricao;
@@ -157,14 +157,13 @@ if (sessionStorage.getItem('logado')){
         imagem.style.gridArea = 'a1';
         imagem.style.display = 'flex';
         imagem.style.height = '20rem';
-        imagem.style.width = 'fit-content';
+        imagem.style.width = '100%';
         imagem.style.objectFit = 'cover';
         imagem.style.objectPosition = 'top';
         imagem.src = atleta.imagem;
         imagem.alt = atleta.nome;
 
         const titulo = document.createElement('section');
-        //titulo.className = 'titulo';
         titulo.style.gridArea = "a2 a3";
         titulo.style.display = 'flex';
         titulo.style.flexDirection = 'column';
@@ -174,78 +173,26 @@ if (sessionStorage.getItem('logado')){
         const pPosicao = document.createElement('p');
         pPosicao.style.fontWeight = 'bold';
         pPosicao.style.fontFamily = 'sans-serif';
-        pPosicao.style.fontSize = '1.1rem';
         pPosicao.style.textTransform = 'uppercase';
         pPosicao.style.color = 'white';
         pPosicao.style.backgroundColor = 'black';
         pPosicao.style.width = '100%';
-        pPosicao.style.height = '2rem';
         pPosicao.style.textAlign = 'center';
-        pPosicao.style.position = 'relative';
-        pPosicao.style.bottom = '-2rem';
         pPosicao.innerHTML = atleta.posicao;
 
-        const pNome = document.createElement('p');
-        pNome.style.fontWeight = 'bold';
-        titulo.style.whiteSpace = 'wrap';
-        pNome.style.fontFamily = 'sans-serif';
-        pNome.style.fontSize = '1.5rem';
-        pNome.style.textTransform = 'uppercase';
-        pNome.style.textAlign = 'center';
-        pNome.innerHTML = atleta.nome;
+        titulo.appendChild(pPosicao);
 
         const btn_more = document.createElement('button');
         btn_more.id = 'btn_more';
-        btn_more.style.gridArea = 'a4';
+        btn_more.style.gridArea = 'a3';
         btn_more.innerHTML = 'SAIBA MAIS';
 
-        const pDescri = document.createElement('p');
-        //pDescri.className = 'descri'
-        pDescri.style.gridArea = 'a3';
-        pDescri.innerHTML = atleta.descricao;
-        pDescri.style.overflow = 'hidden';
-        pDescri.style.whiteSpace = 'nowrap';
-        pDescri.style.textOverflow = 'ellipsis';
-
-        const pNasci = document.createElement('p');
-        //pNasci.className = 'nasci'
-        pNasci.style.gridArea = 'a4';
-        pNasci.innerHTML = atleta.nascimento;
-
         divCard.appendChild(imagem);
-        
-        titulo.appendChild(pPosicao);
-        titulo.appendChild(pNome);
-
         divCard.appendChild(titulo);
         divCard.appendChild(btn_more)
 
-        //divCard.appendChild(pDescri);
-        //divCard.appendChild(pNasci);
-
         container.appendChild(divCard);
     }
-
-
-    inputPesquisa.onkeyup = (event) => {
-        const valor = event.target.value;
-        const resultado = lista_jogadores.filter(
-            (elemento) => elemento.posicao.toLowerCase().includes(valor.toLowerCase())
-        )
-
-        container.innerHTML= '';
-        resultado.forEach(
-            (jogador) => {
-                constroiCard(jogador)
-            }
-        )
-    }
-
-    container.innerHTML = `
-        <div style = 'text-align: center'>
-            <img src = 'assets/imagens/loading.gif'/>
-        </div>
-    `;
 
     const pega_json = async(caminho) => {
         const resposta = await fetch(caminho);
@@ -253,17 +200,25 @@ if (sessionStorage.getItem('logado')){
         return dados;
     }
 
-    pega_json(url).then(
-        (r) => {
+    const carregarDados = async (url) => {
+        container.innerHTML = `
+        <div style = 'display: flex; flex-direction: column; justify-content: center; align-itens: center; margin: 0 auto;'>
+            <img src = 'assets/imagens/loading.gif'/>
+            <h3>Carregando dados, por favor aguarde...</h3>
+        </div>
+        `;
+        const data = await pega_json(url);
+        lista_jogadores = data;
+        
         container.innerHTML = '';
-        lista_jogadores = r;
-        r.forEach(
-        (jogadora) => {
-            constroiCard(jogadora)
-        }
-        )
-        }
-    );
+
+        lista_jogadores.forEach((jogador) => {
+            constroiCard(jogador);
+        });
+    }
 }else {
-    document.body.innerHTML = '<h1>Você não está logado</h1>';
+    const h1 = document.createElement('h1');
+    h1.textContent = 'Acesso negado, faça login para acessar essa página';
+    document.body.innerHTML = '';
+    document.body.appendChild(h1);
 }
