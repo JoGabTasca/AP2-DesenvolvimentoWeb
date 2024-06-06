@@ -7,7 +7,6 @@ button{
     color: rgb(0, 0, 0);
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
     cursor: pointer;
     background-color: white;
     border: 2px solid black;
@@ -44,15 +43,43 @@ button:hover {
     outline: none;
 }
 
-@media screen and (max-width: 768px){
+#select{
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: 0 auto;
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#select option{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+@media screen and (max-width: 767px){
     #myContainer {
         grid-template-columns: auto;
     }
+    #btns{
+        display: none;
+    }
+    #select{
+        display: flex;
+    }
 }
 
-@media screen and (min-width: 769px){
+@media screen and (min-width: 768px){
     #myContainer {
         grid-template-columns: auto auto;
+    }
+    #btns{
+        display: flex;
+    }
+    #select{
+        display: none;
     }
 }
 

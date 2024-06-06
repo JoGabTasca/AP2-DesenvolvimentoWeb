@@ -28,7 +28,7 @@ if (sessionStorage.getItem('logado')){
         divCard.style.color = 'white';
         divCard.style.fontSize = '1.2rem';
         divCard.style.display = 'grid';
-        divCard.style.width = '100rem';
+        divCard.style.width = 'fit-content';
         divCard.style.padding = '.5rem';
         divCard.style.position = 'absolute';
         divCard.style.top = '50%';

@@ -102,7 +102,7 @@ if (sessionStorage.getItem('logado')){
     header.style.marginBottom = '5px';
 
     const botoes = document.createElement('div');
-    botoes.style.display = 'flex';
+    botoes.id = 'btns';
     botoes.style.height = '4rem';
     botoes.style.justifyContent = 'center';
     botoes.style.marginBottom = '5px';
@@ -111,8 +111,23 @@ if (sessionStorage.getItem('logado')){
     botoes.appendChild(btn_feminino);
     botoes.appendChild(btn_all);
 
+    const select = document.createElement('select')
+    select.id = 'select';
+    select.style.height = '4rem';
+    select.style.justifyContent = 'center';
+    select.style.marginBottom = '5px';
+    select.innerHTML = `
+    <select>
+        <option value disabled>Escolha o elenco</option>
+        <option value='All'>Elenco Completo</option>
+        <option value='Feminino'>Elenco Feminino</option>
+        <option value='Masculino'>Elenco Masculino</option>
+    </select>
+    `
+
     document.body.appendChild(header);
     document.body.appendChild(botoes);
+    document.body.appendChild(select);
     document.body.appendChild(divPesquisa);
     document.body.appendChild(container);
 
