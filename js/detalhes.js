@@ -8,15 +8,13 @@ if (sessionStorage.getItem('logado')){
     const btn_voltar = document.createElement('button');
         btn_voltar.innerHTML = 'Voltar';
         btn_voltar.style.gridArea = 'a8';
-        btn_voltar.style.padding = '.5rem';
-        btn_voltar.style.border = 'white 2px solid';
+        btn_voltar.style.padding = '1rem';
+        btn_voltar.style.border = 'white 1px solid';
         btn_voltar.style.borderRadius = '5px';
         btn_voltar.style.color = 'white';
         btn_voltar.style.backgroundColor = 'none';
         btn_voltar.style.background= 'none';
         btn_voltar.style.cursor = 'pointer';
-        btn_voltar.style.width = '5rem';
-        btn_voltar.style.margin = '0 auto';
         btn_voltar.style.zIndex = '999';
         btn_voltar.onclick = () => {
             window.location.href = 'jogadores.html';
@@ -31,7 +29,7 @@ if (sessionStorage.getItem('logado')){
         imagem.style.height = 'fit-content';
         imagem.style.width = 'fit-content';
         imagem.style.objectFit = 'cover';
-        imagem.style.margin = '0 auto';
+        imagem.style.margin = 'auto auto';
         imagem.src = atleta.imagem;
         imagem.alt = atleta.nome;
 
@@ -53,35 +51,41 @@ if (sessionStorage.getItem('logado')){
         pNome.style.fontWeight = 'bold';
         pNome.style.fontFamily = 'sans-serif';
         pNome.style.fontSize = '1.3rem';
+        pNome.style.padding = '1rem';
         pNome.style.textTransform = 'uppercase';
         pNome.innerHTML = atleta.nome;
 
         const pDescri = document.createElement('p');
         pDescri.style.gridArea = 'a3';
+        pDescri.style.paddingLeft = '1rem';
         pDescri.style.paddingRight = '1rem';
         pDescri.innerHTML = atleta.detalhes;
 
         const pNasci = document.createElement('p');
-        pNasci.style.gridArea = 'a4';
+        pNasci.style.gridArea = 'a5';
+        pNasci.style.paddingLeft = '1rem';
         pNasci.innerHTML = `Nascimento: ${atleta.nascimento}`;
 
         const pJogos = document.createElement('p');
-        pJogos.style.gridArea = 'a5';
+        pJogos.style.gridArea = 'a4';
+        pJogos.style.paddingLeft = '1rem';
         pJogos.innerHTML = `Numero de jogos: ${atleta.n_jogos}`;
 
         const pNatu = document.createElement('p');
         pNatu.style.gridArea = 'a6';
+        pNatu.style.paddingLeft = '1rem';
         pNatu.innerHTML = `Naturalidade: ${atleta.naturalidade}`;
 
         const pExtra = document.createElement('p');
-        pExtra.innerHTML = `id: ${atleta.id}| elenco: ${atleta.elenco}| altura: ${atleta.altura? atleta.altura : 'Não informado'}` ;
+        pExtra.innerHTML = `id: ${atleta.id}| elenco: ${atleta.elenco}| altura: ${atleta.altura? atleta.altura : 'Não informado'}`;
+        pExtra.style.paddingLeft = '1rem';
         pExtra.style.gridArea = 'a7';
 
         divCard.appendChild(imagem);
         
-        divCard.appendChild(titulo);
-        titulo.appendChild(pPosicao);
         titulo.appendChild(pNome);
+        titulo.appendChild(pPosicao);
+        divCard.appendChild(titulo);
 
         divCard.appendChild(pDescri);
         divCard.appendChild(pJogos);

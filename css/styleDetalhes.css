@@ -1,26 +1,33 @@
 body, html{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    flex-direction: column;
-    background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;    
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+}
+
+body{
+  background: url("/assets/imagens/waves-bg-detalhes.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 #card{
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.418);
+  border: 2px solid rgba(0, 0, 0, 0.712);
+  padding: .5rem;
   color: white;
   font-size: 1.2rem;
   display: grid;
-  width: 100%;
+  justify-content: space-evenly;
+  width: 75%;
   padding: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: none;
-  margin: 0;
   grid-template-columns: 25rem 1fr;
   grid-template-areas: 
     "a1 a2"

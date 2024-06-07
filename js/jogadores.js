@@ -117,9 +117,9 @@ if (sessionStorage.getItem('logado')){
     header.style.backgroundColor = 'black';
     header.style.justifyContent = 'center';
     header.style.alignItems = 'center';
-    header.style.padding = '0';
+    header.style.padding = '1rem';
     header.style.margin = '0';
-    header.style.height = '8rem';
+    header.style.height = 'fit-content';
     header.style.marginBottom = '5px';
 
     const botoes = document.createElement('div');
@@ -185,8 +185,9 @@ if (sessionStorage.getItem('logado')){
         divCard.style.display = 'grid';
         divCard.style.width = '220px';
         divCard.style.padding = '.5rem';
-        divCard.style.border = '3px solid black';
+        divCard.style.border = '2px solid rgba(0,0,0,0.8)';
         divCard.style.borderRadius = '10px';
+        divCard.style.boxShadow = '12px 25px 25px 0px rgba(0,0,0,0.8)';
         divCard.style.gridTemplateRows = "20rem 1rem 5rem";
         divCard.style.gridTemplateAreas = "'a1' 'a2' 'a3'";
 
