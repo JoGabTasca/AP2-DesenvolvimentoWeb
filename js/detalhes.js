@@ -7,10 +7,7 @@ async function fetchAtletaPorId(id) {
 if (sessionStorage.getItem('logado')){
     const btn_voltar = document.createElement('button');
         btn_voltar.innerHTML = 'Voltar';
-        btn_voltar.style.position = 'absolute';
-        btn_voltar.style.top = '1rem';
-        btn_voltar.style.left = '50%';
-        btn_voltar.style.transform = 'translateX(-50%)';
+        btn_voltar.style.gridArea = 'a8';
         btn_voltar.style.padding = '.5rem';
         btn_voltar.style.border = 'white 2px solid';
         btn_voltar.style.borderRadius = '5px';
@@ -18,32 +15,23 @@ if (sessionStorage.getItem('logado')){
         btn_voltar.style.backgroundColor = 'none';
         btn_voltar.style.background= 'none';
         btn_voltar.style.cursor = 'pointer';
+        btn_voltar.style.width = '5rem';
+        btn_voltar.style.margin = '0 auto';
+        btn_voltar.style.zIndex = '999';
         btn_voltar.onclick = () => {
             window.location.href = 'jogadores.html';
         }
 
     const constroiCard = ( atleta ) => {
         const divCard = document.createElement('article');
-        divCard.style.backgroundColor = 'black';
-        divCard.style.color = 'white';
-        divCard.style.fontSize = '1.2rem';
-        divCard.style.display = 'grid';
-        divCard.style.width = 'fit-content';
-        divCard.style.padding = '.5rem';
-        divCard.style.position = 'absolute';
-        divCard.style.top = '50%';
-        divCard.style.left = '50%';
-        divCard.style.transform = 'translate(-50%, -50%)';
-        divCard.style.border = '2px solid grey';
-        divCard.style.borderRadius = '5px';
-        divCard.style.gridTemplateColumns = "25rem 1fr";
-        divCard.style.gridTemplateAreas = "'a1 a2' 'a1 a3' 'a1 a4' 'a1 a5' 'a1 a6' 'a1 a7'";
+        divCard.id = 'card';
 
         const imagem = document.createElement('img');
         imagem.style.gridArea = 'a1';
         imagem.style.height = 'fit-content';
         imagem.style.width = 'fit-content';
         imagem.style.objectFit = 'cover';
+        imagem.style.margin = '0 auto';
         imagem.src = atleta.imagem;
         imagem.alt = atleta.nome;
 
@@ -70,6 +58,7 @@ if (sessionStorage.getItem('logado')){
 
         const pDescri = document.createElement('p');
         pDescri.style.gridArea = 'a3';
+        pDescri.style.paddingRight = '1rem';
         pDescri.innerHTML = atleta.detalhes;
 
         const pNasci = document.createElement('p');
@@ -85,7 +74,7 @@ if (sessionStorage.getItem('logado')){
         pNatu.innerHTML = `Naturalidade: ${atleta.naturalidade}`;
 
         const pExtra = document.createElement('p');
-        pExtra.innerHTML = `id: ${atleta.id}| elenco: ${atleta.elenco}| altura: ${atleta.altura}` ;
+        pExtra.innerHTML = `id: ${atleta.id}| elenco: ${atleta.elenco}| altura: ${atleta.altura? atleta.altura : 'Não informado'}` ;
         pExtra.style.gridArea = 'a7';
 
         divCard.appendChild(imagem);
@@ -99,29 +88,31 @@ if (sessionStorage.getItem('logado')){
         divCard.appendChild(pNatu);
         divCard.appendChild(pNasci);
         divCard.appendChild(pExtra);
+        divCard.appendChild(btn_voltar);
 
         document.body.appendChild(divCard);
     }
-
-    document.body.appendChild(btn_voltar);
 
     const parametros = new URLSearchParams(window.location.search);
 
     // Obter o ID do atleta da URL
     const idAtleta = parametros.get('id');
+    const h1 = document.createElement('h1');
+    h1.style.color = 'white';
+    h1.textContent = 'Jogador não encontrado';
 
     if (idAtleta) {
         // Buscar o atleta pelo ID
         fetchAtletaPorId(idAtleta).then(atleta => {
-            console.log('Atleta:', atleta);
             constroiCard(atleta);
         }).catch(error => {
             console.error('Erro ao buscar atleta:', error);
+            document.body.innerHTML = '';
+            document.body.appendChild(btn_voltar);
+            document.body.appendChild(h1);
         });
     } else {
         const h1 = document.createElement('h1');
-        h1.style.color = 'white';
-        h1.textContent = 'Jogador não encontrado';
         document.body.innerHTML = '';
         document.body.appendChild(btn_voltar);
         document.body.appendChild(h1);

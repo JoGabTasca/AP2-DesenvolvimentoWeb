@@ -1,6 +1,29 @@
 if (sessionStorage.getItem('logado')){
     let lista_jogadores;
 
+    const pega_json = async(caminho) => {
+        const resposta = await fetch(caminho);
+        const dados = await resposta.json();
+        return dados;
+    }
+
+    const carregarDados = async (url) => {
+        container.innerHTML = `
+        <div style = 'display: flex; flex-direction: column; justify-content: center; align-itens: center; margin: 0 auto;'>
+            <img src = 'assets/imagens/loading.gif'/>
+            <h3>Carregando dados, por favor aguarde...</h3>
+        </div>
+        `;
+        const data = await pega_json(url);
+        lista_jogadores = data;
+        
+        container.innerHTML = '';
+
+        lista_jogadores.forEach((jogador) => {
+            constroiCard(jogador);
+        });
+    }
+
     const container = document.createElement('div');
     container.style.display = 'grid';
     container.style.flexWrap = 'wrap';
@@ -76,8 +99,6 @@ if (sessionStorage.getItem('logado')){
         const resultado = lista_jogadores.filter(
             (elemento) => elemento.posicao.toLowerCase().includes(valor.toLowerCase())
         )
-    
-        // Limpar o contêiner antes de adicionar novos cartões
         container.innerHTML= '';
     
         resultado.forEach(
@@ -118,12 +139,25 @@ if (sessionStorage.getItem('logado')){
     select.style.marginBottom = '5px';
     select.innerHTML = `
     <select>
-        <option value disabled>Escolha o elenco</option>
-        <option value='All'>Elenco Completo</option>
+        <option disabled selected>Escolha o elenco</option>
         <option value='Feminino'>Elenco Feminino</option>
         <option value='Masculino'>Elenco Masculino</option>
+        <option value='All'>Elenco Completo</option>
     </select>
-    `
+    `;
+    select.onchange = (e) => {
+        const valor = e.target.value;
+        if (valor === 'Feminino'){
+            container.innerHTML = '';
+            carregarDados('https://botafogo-atletas.mange.li/2024-1/feminino');
+        } else if (valor === 'Masculino'){
+            container.innerHTML = '';
+            carregarDados('https://botafogo-atletas.mange.li/2024-1/masculino');
+        } else if (valor === 'All'){
+            container.innerHTML = '';
+            carregarDados('https://botafogo-atletas.mange.li/2024-1/all');
+        }
+    }
 
     document.body.appendChild(header);
     document.body.appendChild(botoes);
@@ -186,8 +220,9 @@ if (sessionStorage.getItem('logado')){
         titulo.style.justifyContent = 'center';
 
         const pPosicao = document.createElement('p');
-        pPosicao.style.fontWeight = 'bold';
-        pPosicao.style.fontFamily = 'sans-serif';
+        pPosicao.style.fontFamily = '"Bebas Neue", sans-serif';
+        pPosicao.style.fontWeight = '400';
+        pPosicao.style.fontSize = '1.3rem';
         pPosicao.style.textTransform = 'uppercase';
         pPosicao.style.color = 'white';
         pPosicao.style.backgroundColor = 'black';
@@ -207,29 +242,6 @@ if (sessionStorage.getItem('logado')){
         divCard.appendChild(btn_more)
 
         container.appendChild(divCard);
-    }
-
-    const pega_json = async(caminho) => {
-        const resposta = await fetch(caminho);
-        const dados = await resposta.json();
-        return dados;
-    }
-
-    const carregarDados = async (url) => {
-        container.innerHTML = `
-        <div style = 'display: flex; flex-direction: column; justify-content: center; align-itens: center; margin: 0 auto;'>
-            <img src = 'assets/imagens/loading.gif'/>
-            <h3>Carregando dados, por favor aguarde...</h3>
-        </div>
-        `;
-        const data = await pega_json(url);
-        lista_jogadores = data;
-        
-        container.innerHTML = '';
-
-        lista_jogadores.forEach((jogador) => {
-            constroiCard(jogador);
-        });
     }
 }else {
     const h1 = document.createElement('h1');
