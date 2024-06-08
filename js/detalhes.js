@@ -97,35 +97,36 @@ if (sessionStorage.getItem('logado')){
         document.body.appendChild(divCard);
     }
 
-    const parametros = new URLSearchParams(window.location.search);
+    const erro = document.createElement('h1');
+    erro.style.color = 'white';
+    erro.innerHTML = 'Erro ao tentar buscar atleta';
+
+    const url = new URLSearchParams(window.location.search);
 
     // Obter o ID do atleta da URL
-    const idAtleta = parametros.get('id');
-    const h1 = document.createElement('h1');
-    h1.style.color = 'white';
-    h1.textContent = 'Jogador não encontrado';
+    const idAtleta = url.get('id');
 
     if (idAtleta) {
-        // Buscar o atleta pelo ID
-        fetchAtletaPorId(idAtleta).then(atleta => {
-            constroiCard(atleta);
-        }).catch(error => {
-            console.error('Erro ao buscar atleta:', error);
-            document.body.innerHTML = '';
+        
+        if (idAtleta > 60) {
+            erro.innerHTML
+            console.log('Jogador com ID', idAtleta, 'não encontrado');
             document.body.appendChild(btn_voltar);
-            document.body.appendChild(h1);
-        });
+            document.body.appendChild(erro);
+        } else {
+            // Buscar o atleta pelo ID
+            fetchAtletaPorId(idAtleta).then(atleta => {
+                constroiCard(atleta);
+            });
+        }
     } else {
-        const h1 = document.createElement('h1');
-        document.body.innerHTML = '';
+        erro.innerHTML
         document.body.appendChild(btn_voltar);
-        document.body.appendChild(h1);
+        document.body.appendChild(erro);
     }
 
 } else {
-    const h1 = document.createElement('h1');
-    h1.style.color = 'white';
-    h1.textContent = 'Acesso negado, faça login para acessar essa página';
-    document.body.innerHTML = '';
-    document.body.appendChild(h1);
+    const deslogado = document.createElement('h1');
+    deslogado.innerHTML = 'Acesso negado, faça login para acessar essa página';
+    document.body.appendChild(deslogado);
 }
