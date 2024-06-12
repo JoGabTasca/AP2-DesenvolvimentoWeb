@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&display=swap');
+
+body, html{
+    padding: 0;
+    margin: 0;
+}
+
+button{
+    color: black;
+    padding: 14px 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    margin: 8px 0;
+    cursor: pointer;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: 2px solid white;
+    transition: .5s;
+}
+
+#btn_sair{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+    margin-left: 5px;
+    border: 2px solid white;
+}
+
+#btn_more{
+    background-color: rgba(255, 255, 255, 0.075);
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+    border: 2px solid black;
+    z-index: 999;
+}
+
+#inputPesquisa{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    border-radius : 10px;
+    height: 30px;
+    border: 2px solid black;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    outline: none;
+}
+
+#select{
+    color: rgb(0, 0, 0);
+    padding: 14px 20px;
+    margin: 0 auto;
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#select option{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+@media screen and (max-width: 767px){
+    #myContainer {
+        grid-template-columns: auto;
+    }
+    #btns{
+        display: none;
+    }
+    #select{
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 768px){
+    #myContainer {
+        grid-template-columns: auto auto;
+    }
+    #btns{
+        display: flex;
+    }
+    #select{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    #myContainer {
+        grid-template-columns: auto auto auto auto;
+    }
+}
