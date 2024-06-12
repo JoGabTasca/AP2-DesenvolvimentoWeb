@@ -9,7 +9,8 @@ if (sessionStorage.getItem('logado')){
         btn_voltar.innerHTML = 'Voltar';
         btn_voltar.style.gridArea = 'a8';
         btn_voltar.style.padding = '1rem';
-        btn_voltar.style.border = 'white 1px solid';
+        btn_voltar.style.border = 'white 2px solid';
+        btn_voltar.style.margin = '1rem';
         btn_voltar.style.borderRadius = '5px';
         btn_voltar.style.color = 'white';
         btn_voltar.style.backgroundColor = 'none';

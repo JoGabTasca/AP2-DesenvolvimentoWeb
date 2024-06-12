@@ -1,6 +1,16 @@
 if (sessionStorage.getItem('logado')){
     let lista_jogadores;
 
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&display=swap');
+        body {
+            font-family: 'Lilita One', cursive;
+        }
+    `;
+    document.head.appendChild(style);
+
     const pega_json = async(caminho) => {
         const resposta = await fetch(caminho);
         const dados = await resposta.json();
@@ -9,7 +19,7 @@ if (sessionStorage.getItem('logado')){
 
     const carregarDados = async (url) => {
         container.innerHTML = `
-        <div style = 'display: flex; flex-direction: column; justify-content: center; align-itens: center; margin: 0 auto;'>
+        <div style = 'display: flex; flex-direction: column; justify-content: center; align-itens: center; margin: 0 auto; font-family: "Roboto", sans-serif'>
             <img src = 'assets/imagens/loading.gif'/>
             <h3>Carregando dados, por favor aguarde...</h3>
         </div>
@@ -42,7 +52,6 @@ if (sessionStorage.getItem('logado')){
     title.innerHTML = 'Elenco de Atletas';
     title.style.color = 'white';
     title.style.textAlign = 'center';
-    title.style.fontFamily = 'sans-serif';
     title.style.textTransform = 'uppercase';
     title.style.margin = '0';
     title.style.padding = '0';
@@ -115,7 +124,7 @@ if (sessionStorage.getItem('logado')){
     header.style.display = 'flex';
     header.style.flexWrap = 'wrap';
     header.style.backgroundColor = 'black';
-    header.style.justifyContent = 'center';
+    header.style.justifyContent = 'space-between';
     header.style.alignItems = 'center';
     header.style.padding = '1rem';
     header.style.margin = '0';
@@ -181,13 +190,14 @@ if (sessionStorage.getItem('logado')){
         const divCard = document.createElement('article');
         //divCard.className = 'card';
         // radial-gradient(circle, rgba(255,255,255,1) 29%, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%)
-        divCard.style.background = 'black';
+        divCard.style.background = 'none';
         divCard.style.display = 'grid';
         divCard.style.width = '220px';
         divCard.style.padding = '.5rem';
-        divCard.style.border = '2px solid rgba(0,0,0,0.8)';
+        divCard.style.border = '2px solid black';
         divCard.style.borderRadius = '10px';
-        divCard.style.boxShadow = '12px 25px 25px 0px rgba(0,0,0,0.8)';
+        divCard.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+        divCard.style.backdropFilter = 'blur(10px)';
         divCard.style.gridTemplateRows = "20rem 1rem 5rem";
         divCard.style.gridTemplateAreas = "'a1' 'a2' 'a3'";
 
@@ -221,7 +231,6 @@ if (sessionStorage.getItem('logado')){
         titulo.style.justifyContent = 'center';
 
         const pPosicao = document.createElement('p');
-        pPosicao.style.fontFamily = '"Bebas Neue", sans-serif';
         pPosicao.style.fontWeight = '400';
         pPosicao.style.fontSize = '1.3rem';
         pPosicao.style.textTransform = 'uppercase';

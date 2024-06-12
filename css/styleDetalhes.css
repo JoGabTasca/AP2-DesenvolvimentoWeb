@@ -7,22 +7,16 @@ body, html{
   flex-direction: column;
 }
 
-body{
-  background: url("/assets/imagens/waves-bg-detalhes.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
 #card{
-  background-color: rgba(0, 0, 0, 0.418);
-  border: 2px solid rgba(0, 0, 0, 0.712);
+  background: url("../assets/imagens/waves-bg-detalhes.jpg");
+  border: 2px solid black;
+  border-radius: 10px;
   padding: .5rem;
   color: white;
   font-size: 1.2rem;
   display: grid;
   justify-content: space-evenly;
-  width: 75%;
+  width: 55rem;
   padding: 0;
   position: absolute;
   top: 50%;
@@ -41,6 +35,7 @@ body{
 
 @media (max-width: 767px) {
   #card{
+    width: fit-content;
     grid-template-columns: 1fr;
     grid-template-areas: 
       "a1"
