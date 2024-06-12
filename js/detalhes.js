@@ -113,7 +113,10 @@ if (sessionStorage.getItem('logado')){
             erro.innerHTML
             console.log('Jogador com ID', idAtleta, 'não encontrado');
             document.body.appendChild(btn_voltar);
+            btn_voltar.style.color = 'black';
+            btn_voltar.style.border = 'black 2px solid';
             document.body.appendChild(erro);
+            erro.style.color = 'black';
         } else {
             // Buscar o atleta pelo ID
             fetchAtletaPorId(idAtleta).then(atleta => {

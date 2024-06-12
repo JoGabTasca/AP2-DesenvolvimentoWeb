@@ -19,7 +19,7 @@ if (sessionStorage.getItem('logado')){
 
     const carregarDados = async (url) => {
         container.innerHTML = `
-        <div style = 'display: flex; flex-direction: column; justify-content: center; align-itens: center; margin: 0 auto; font-family: "Roboto", sans-serif'>
+        <div style = 'display: flex; flex-direction: column; justify-content: center; align-items: center; width: fit-content; margin: 0 auto; margin-right: -100px; font-family: "Roboto", sans-serif'>
             <img src = 'assets/imagens/loading.gif'/>
             <h3>Carregando dados, por favor aguarde...</h3>
         </div>
